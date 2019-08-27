@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    Hello World
+    <ul>
+
+    </ul>
+
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script>
+        const sseSource = new EventSource('/sse-server');
+
+        sseSource.addEventListener('message', (e) => {
+            const messageData = e.data;
+            console.log(messageData);
+            $('ul').append('<li>' + e.data + ' (message id: ' + e.lastEventId + ')</li>');
+        });
+
+        // When finished with the source close the connection
+        // sseSource.close();
+    </script>
+</body>
+
+</html>
